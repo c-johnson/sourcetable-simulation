@@ -13,6 +13,7 @@
     "vanillajs-datepicker": "^1.1.4"
   },
   "dependencies": {
+    "leaflet": "^1.7.1",
     "lodash-es": "^4.17.21",
     "moment": "^2.29.1"
   }

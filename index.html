@@ -2,7 +2,10 @@
 
 <head>
   <link rel="stylesheet" href="./style/index.css"></link>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+  <link rel="stylesheet" href="./node_modules/vanillajs-datepicker/dist/css/datepicker.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
 </head>
 
 <body>
@@ -24,7 +27,14 @@
       <div><b>Most popular month: </b> <span id="most-popular-month"></span></div>
       <div><b>Top three launch locations:</b> <span id="top-three-launch-locations"></span></div>
     </div>
+
+    <div id="leaflet-map">
+
+    </div>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
   <script type="module" src="./scripts/index.js"></script>
 </body>

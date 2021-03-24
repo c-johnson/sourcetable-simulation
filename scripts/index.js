@@ -1,9 +1,11 @@
-// import Datepicker from '../node_modules/vanillajs-datepicker/js/Datepicker.js';
 import DateRangePicker from '../node_modules/vanillajs-datepicker/js/DateRangePicker.js';
 
 import rocketAPI from './api.js'
 import calculator from './calculate.js';
 import { USDFormatter } from './formatters.js'
+import { geocoordsMap, mapboxAccessToken } from './constants.js'
+
+let launchMap;
 
 var initializeApplication = () => {
   const datepickerElem = document.getElementById('datepicker');
@@ -15,6 +17,17 @@ var initializeApplication = () => {
   const datepickerEndElem = document.getElementById('datepicker-end');
   datepickerStartElem.addEventListener('changeDate', (e) => { loadLaunches(e, rangepicker); }, false);
   datepickerEndElem.addEventListener('changeDate', (e) => { loadLaunches(e, rangepicker); }, false);
+
+  launchMap = L.map('leaflet-map').setView([51.505, -0.09], 1);
+
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: mapboxAccessToken
+  }).addTo(launchMap);
 }
 
 var loadLaunches = async (e, rangepicker) => {
@@ -34,6 +47,10 @@ var renderData = (computedMetrics) => {
   document.querySelectorAll('#pct-launch-success')[0].innerHTML = `${pctSuccessFormat}%`;
   document.querySelectorAll('#most-popular-month')[0].innerHTML = computedMetrics.mostPopularMonth;
   document.querySelectorAll('#top-three-launch-locations')[0].innerHTML = computedMetrics.topThreeLaunchLocations.join(", ")
+
+  L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[0]]).addTo(launchMap)
+  L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[1]]).addTo(launchMap)
+  L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[2]]).addTo(launchMap)
 }
 
 initializeApplication();
