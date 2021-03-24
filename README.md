@@ -1,3 +1,5 @@
+![Rocket launches code simulation](./images/rocket-launches.png)
+
 To run:
 
 ```
