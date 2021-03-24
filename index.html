@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="./style/index.css"></link>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Rocket launches</h1>
+
+    <p>A small program to compute key metrics on historical rocket launches from planet Earth.</p>
+    <p>Please enter a date range below: </p>
+
+    <div id="datepicker">
+      <input id="datepicker-start" type="text" name="start">
+      <span>to</span>
+      <input id="datepicker-end" type="text" name="end">
+    </div>
+
+    <!-- <input id="datepicker-start" type="text" name="datepicker-start" data-date="01/01/1980">
+    <input id="datepicker-end" type="text" name="datepicker-end" date-date="01/01/2021"> -->
+  </div>
+
+  <script type="module" src="./scripts/index.js"></script>
+</body>
