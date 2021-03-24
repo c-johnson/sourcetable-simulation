@@ -23,12 +23,15 @@ class Calculator {
 
     // compute top three 'launch_locations', just use siteName for now
     // TODO: some siteNames are undefined :(
-    const locationArr = metricsArr.map(x => x.topLocations).flat();
-    const sitenameCount = _.countBy(locationArr, 'siteName');
+    const locationArr = metricsArr
+      .map(x => x.topLocations)
+      .flat()
+      .map(x => { return {...x, computedName: x.siteName || x.platform} });
+
+    const computedNameCount = _.countBy(locationArr, 'computedName');
     const countryCount = _.countBy(locationArr, 'countryName');
 
-    result.topThreeLaunchLocations = _.toPairs(sitenameCount).sort((a, b) => b[1] - a[1]).slice(0, 3).map(arr => arr[0]);
-
+    result.topThreeLaunchLocations = _.toPairs(computedNameCount).sort((a, b) => b[1] - a[1]).slice(0, 3).map(arr => arr[0]);
     result.topThreeLaunchCountries = _.toPairs(countryCount).sort((a, b) => b[1] - a[1]).slice(0, 3).map(arr => arr[0]);
 
     console.log('result = ', result)
