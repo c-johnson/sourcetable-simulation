@@ -24,6 +24,7 @@ class Calculator {
     // compute top three 'launch_locations', just use siteName for now
     // TODO: some siteNames are undefined :(
     const locationArr = metricsArr
+      .filter(x => x.topLocations)
       .map(x => x.topLocations)
       .flat()
       .map(x => { return {...x, computedName: x.siteName || x.platform} });
