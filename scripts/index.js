@@ -6,6 +6,7 @@ import { USDFormatter } from './formatters.js'
 import { geocoordsMap, mapboxAccessToken } from './constants.js'
 
 let launchMap;
+let markers = [];
 
 var initializeApplication = () => {
   const datepickerElem = document.getElementById('datepicker');
@@ -48,9 +49,12 @@ var renderData = (computedMetrics) => {
   document.querySelectorAll('#most-popular-month')[0].innerHTML = computedMetrics.mostPopularMonth;
   document.querySelectorAll('#top-three-launch-locations')[0].innerHTML = computedMetrics.topThreeLaunchLocations.join(", ")
 
-  L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[0]]).addTo(launchMap)
-  L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[1]]).addTo(launchMap)
-  L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[2]]).addTo(launchMap)
+  markers.forEach(m => m.remove());
+  markers = [];
+
+  markers.push(L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[0]]).addTo(launchMap))
+  markers.push(L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[1]]).addTo(launchMap))
+  markers.push(L.marker(geocoordsMap[computedMetrics.topThreeLaunchCountries[2]]).addTo(launchMap))
 }
 
 initializeApplication();

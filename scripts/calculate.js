@@ -18,8 +18,10 @@ class Calculator {
     result.pctMissionSuccess = _.meanBy(metricsArr, 'pctMissionSuccess')
 
     // compute most popular month
-    const monthCount = _.countBy(metricsArr, 'topMonthByLaunchCount');
-    result.mostPopularMonth = Object.keys(monthCount).reduce((a, b) => monthCount[a] > monthCount[b] ? a : b);
+    const monthCount = _.countBy(metricsArr.filter(m => m.topMonthByLaunchCount), 'topMonthByLaunchCount');
+
+    result.mostPopularMonth = Object.keys(monthCount)
+      .reduce((a, b) => monthCount[a] > monthCount[b] ? a : b);
 
     // compute top three 'launch_locations', just use siteName for now
     // TODO: some siteNames are undefined :(
